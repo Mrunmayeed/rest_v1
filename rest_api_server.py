@@ -1,6 +1,7 @@
 from bottle import Bottle, request, response, run, template, static_file
 from pprint import pprint 
 import time 
+from datetime import date
 import algebra 
 import os 
 import sqlite3 
@@ -30,6 +31,7 @@ def time_server():
     response.set_header('Cache-Control', 'max-age=3')
     return time.ctime()
 
+
 @app.route('/joke', method='GET')
 def joke_server():
     response.content_type = 'text/plain' 
@@ -51,6 +53,11 @@ def joke_server():
 def upper_case_service(word):
     response.content_type = 'text/plain' 
     return word.upper()
+
+@app.route('/lower/<word>', method='GET')
+def lower_case_service(word):
+    response.content_type = 'text/plain' 
+    return word.lower()
 
 @app.route('/prime/<number>', method='GET')
 def is_prime(number):
